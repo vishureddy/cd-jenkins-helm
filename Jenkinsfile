@@ -4,7 +4,7 @@ pipeline {
         NAME = "${env.BRANCH_NAME == "master" ? "example" : "example-staging"}"
         VERSION = readMavenPom().getVersion()
         DOMAIN = 'localhost'
-        REGISTRY = 'davidcampos/k8s-jenkins-example'
+        REGISTRY = 'visweswar1/go_restapi'
         REGISTRY_CREDENTIAL = 'dockerhub-davidcampos'
     }
     agent {
@@ -16,8 +16,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                container('maven') {
-                    sh 'mvn package'
+                container('go') {
+                    sh 'go build'
                 }
             }
         }
